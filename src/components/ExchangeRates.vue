@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for='(key, value) in rates' :key=value >
+        <tr v-for='(key, value) in sortData(rates)' :key=value >
           <td>{{ value }} </td>
           <td>{{ formatNum(key) }}</td>
         </tr>
@@ -42,6 +42,16 @@ export default {
           this.date = response.data.date
         })
         .catch(error => this.errors.push(error))
+    },
+    sortData(rates) {
+      const orderedRates = {};
+      Object.keys(rates)
+        .filter((rate) => rate !== 'NZD')
+        .sort()
+        .forEach(function(key) {
+          orderedRates[key] = rates[key]
+        });
+      return orderedRates
     },
     formatNum(num) {
       return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
