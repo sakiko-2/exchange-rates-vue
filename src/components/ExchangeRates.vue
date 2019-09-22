@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for='(key, value) in rates' :key=value >
           <td>{{ value }} </td>
-          <td>{{ key.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+          <td>{{ formatNum(key) }}</td>
         </tr>
       </tbody>
     </table>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
-const URL = 'https://api.exchangeratesapi.io/latest?base=NZD';
+const URL = 'https://api.exchangeratesapi.io/latest?base=NZD'
 
 export default {
   name: 'exchange-rates',
@@ -42,9 +42,11 @@ export default {
           this.date = response.data.date
         })
         .catch(error => this.errors.push(error))
+    },
+    formatNum(num) {
+      return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
   }
-  
 }
 </script>
 
