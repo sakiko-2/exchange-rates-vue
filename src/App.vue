@@ -2,18 +2,21 @@
   <div id='app'>
     <Header />
     <ExchangeRates />
+    <Footer />
   </div>
 </template>
 
 <script>
 import ExchangeRates from './components/ExchangeRates.vue'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
     ExchangeRates,
-    Header
+    Header,
+    Footer
   }
 }
 </script>
