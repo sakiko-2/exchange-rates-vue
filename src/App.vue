@@ -17,6 +17,9 @@ export default {
     ExchangeRates,
     Header,
     Footer
+  },
+  created() {
+    document.title = 'Exchange Rates'
   }
 }
 </script>
