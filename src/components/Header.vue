@@ -10,9 +10,9 @@
 .navbar {
   background-color: #add8e6;
   padding: 0.5rem 2rem;
+  min-height: fit-content;
 }
 .navbar-brand svg {
   color: #f0ffff;
 }
-
 </style>

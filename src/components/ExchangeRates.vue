@@ -1,20 +1,25 @@
 <template>
   <div class='exchange-rates'>
-    <h1 class='title'>New Zealand Dollar<br>Foreign Exchange Rates: {{ date }}</h1>
-    <table class='table is-striped' >
-      <thead>
-        <tr>
-          <th>Currency</th>
-          <th>Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for='(key, value) in sortData(rates)' :key=value >
-          <td>{{ value }} </td>
-          <td>{{ formatNum(key) }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if='rates.length === 0'>
+      <span class='loader is-size-2' />
+    </div>
+    <div v-else>
+      <h1 class='title'>New Zealand Dollar<br>Foreign Exchange Rates: {{ date }}</h1>
+      <table class='table is-striped' >
+        <thead>
+          <tr>
+            <th>Currency</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for='(key, value) in sortData(rates)' :key=value >
+            <td>{{ value }} </td>
+            <td>{{ formatNum(key) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -68,8 +73,14 @@ h1 {
 a {
   color: #42b983;
 }
+.exchange-rates {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
 .table {
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
 }
 
