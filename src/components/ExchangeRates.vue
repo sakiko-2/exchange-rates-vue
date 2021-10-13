@@ -26,7 +26,7 @@
 <script>
 import axios from 'axios'
 
-const URL = 'https://api.exchangeratesapi.io/latest?base=NZD'
+const URL = 'https://api.exchangerate.host/latest?base=NZD'
 
 export default {
   name: 'exchange-rates',
