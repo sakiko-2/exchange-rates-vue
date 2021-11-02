@@ -5,38 +5,49 @@
     </div>
     <div v-else>
       <h1 class='title'>New Zealand Dollar<br>Foreign Exchange Rates: {{ date }}</h1>
-      <table class='table is-striped' >
-        <thead>
-          <tr>
-            <th>Currency</th>
-            <th>Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for='(key, value) in sortData(rates)' :key=value >
-            <td>{{ value }} </td>
-            <td>{{ formatNum(key) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <text-filter @searchData="getSearch" />
+      <rate-list v-bind:rates="filteredList" />
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import RateList from './RateList.vue'
+import TextFilter from './TextFilter.vue'
 
 const URL = 'https://api.exchangerate.host/latest?base=NZD'
 
 export default {
   name: 'exchange-rates',
+  components: {
+    RateList,
+    TextFilter
+  },
   data: () => ({
     date: [],
     rates: [],
-    errors: []
+    errors: [],
+    searchText: ''
   }),
   mounted() {
     this.fetchData()
+  },
+  computed: {
+    filteredList: function() {
+      const filteredRates = {}
+      const list = this.rates
+      Object.keys(list).filter((item) => {
+        return (
+          (item !== 'NZD')
+          && item.includes(this.searchText.toUpperCase())
+        )
+      })
+      .forEach(function(key) {
+          filteredRates[key] = list[key]
+        });
+        return filteredRates
+    }
   },
   methods: {
     fetchData() {
@@ -48,24 +59,13 @@ export default {
         })
         .catch(error => this.errors.push(error))
     },
-    sortData(rates) {
-      const orderedRates = {};
-      Object.keys(rates)
-        .filter((rate) => rate !== 'NZD')
-        .sort()
-        .forEach(function(key) {
-          orderedRates[key] = rates[key]
-        });
-      return orderedRates
-    },
-    formatNum(num) {
-      return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    getSearch: function(txt) {
+      this.searchText = txt
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
   margin: 1rem 0;
@@ -76,7 +76,7 @@ a {
 .exchange-rates {
   display: flex;
   flex: 1;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 .table {
