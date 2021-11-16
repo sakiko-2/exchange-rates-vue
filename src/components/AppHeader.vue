@@ -1,7 +1,7 @@
 <template>
-  <nav class='navbar'>
-    <div class='navbar-brand'>
-      <font-awesome-icon :icon="['fas', 'globe']" size='3x'/>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <font-awesome-icon :icon="['fas', 'globe']" size="3x"/>
     </div>
   </nav>
 </template>

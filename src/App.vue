@@ -1,22 +1,22 @@
 <template>
-  <div id='app'>
-    <Header />
-    <ExchangeRates />
-    <Footer />
+  <div id="app">
+    <app-header />
+    <exchange-rates />
+    <app-footer />
   </div>
 </template>
 
 <script>
 import ExchangeRates from './components/ExchangeRates.vue'
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
+import AppHeader from './components/AppHeader.vue'
+import AppFooter from './components/AppFooter.vue'
 
 export default {
   name: 'app',
   components: {
     ExchangeRates,
-    Header,
-    Footer
+    AppHeader,
+    AppFooter
   },
   created() {
     document.title = 'Exchange Rates'

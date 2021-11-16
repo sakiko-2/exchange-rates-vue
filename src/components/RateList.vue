@@ -1,5 +1,6 @@
 <template>
-  <table class='table is-striped' >
+  <div class="rate-list">
+  <table class="rate-list__content table is-striped" >
     <thead>
       <tr>
         <th>Currency</th>
@@ -7,12 +8,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for='(key, value) in rates' :key=value >
-        <td>{{ value }} </td>
-        <td>{{ formatNum(key) }}</td>
+      <tr v-for="rate in rates" :key=rate[0]>
+        <td>{{ rate[0] }} </td>
+        <td>{{ formatNum(rate[1]) }}</td>
       </tr>
     </tbody>
   </table>
+  </div>
 </template>
 
 <script>
@@ -21,8 +23,26 @@ export default {
   props: ['rates'],
   methods: {
     formatNum(num) {
-      return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      return num.toLocaleString('en-US', { minimumFractionDigits: 5, maximumFractionDigits: 5 })
     }
   }
 }
 </script>
+
+<style>
+.rate-list {
+  display: flex;
+  justify-content: center;
+
+}
+
+.rate-list__content {
+  width: 35rem;
+}
+
+@media (max-width: 575.98px) {
+  .rate-list__content {
+    width: 100%;
+  }
+}
+</style>
